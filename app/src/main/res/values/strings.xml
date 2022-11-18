@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TestApp</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="label_explorer">Explorer</string>
+    <string name="label_cart">Cart</string>
+    <string name="label_favourite">Favourite</string>
+    <string name="label_account">Account</string>
+</resources>
