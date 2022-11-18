@@ -17,7 +17,7 @@
         android:id="@+id/tabLayout"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:background="@drawable/tab_layout_background"
+        android:background="@drawable/dark_blue_cornet_background"
         android:saveEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:tabGravity="fill"

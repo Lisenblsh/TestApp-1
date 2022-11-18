@@ -1,4 +1,4 @@
-package com.lis.testapp.domain
+package com.lis.domain
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

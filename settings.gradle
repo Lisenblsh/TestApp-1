@@ -4,6 +4,8 @@ pluginManagement {
     plugins {
         id 'com.google.devtools.ksp' version "$kspVersion" apply false
         id 'org.jetbrains.kotlin.jvm' version "$kotlinVersion" apply false
+        id 'com.android.library' version '7.3.1'
+        id 'org.jetbrains.kotlin.android' version '1.7.20'
     }
     repositories {
         gradlePluginPortal()
@@ -20,3 +22,5 @@ dependencyResolutionManagement {
 }
 rootProject.name = "TestApp"
 include ':app'
+include ':data'
+include ':domain'

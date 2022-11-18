@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import com.lis.domain.ViewPagerAdapter
+import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentViewPagerBinding
-import com.lis.testapp.domain.ViewPagerAdapter
-import com.lis.testapp.domain.tools.ImageFun
 
 class ViewPagerFragment : Fragment() {
 

@@ -3,7 +3,7 @@
     <style name="Theme.TestApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/dark_blue</item>
-        <item name="colorPrimaryVariant">@color/dark_blue</item>
+        <item name="colorPrimaryVariant">@color/lighter_dark_blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/orange</item>
@@ -16,6 +16,9 @@
         <item name="android:windowLayoutInDisplayCutoutMode">default</item>
         <!-- Customize your theme here. -->
         <item name="android:windowBackground">@drawable/splash_screen</item>
+        <item name="fontFamily">@font/mark_pro</item>
+        <item name="android:textStyle">bold</item>
 
+        <item name="android:textColor">@color/black</item>
     </style>
 </resources>
