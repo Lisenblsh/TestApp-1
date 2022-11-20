@@ -5,4 +5,5 @@
     <color name="lighter_dark_blue">#282843</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="yellow">#FFB800</color>
 </resources>

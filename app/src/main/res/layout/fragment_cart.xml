@@ -8,10 +8,11 @@
     tools:context=".presentation.fragments.CartFragment">
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/back_button"
+        android:id="@+id/close_button"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_margin="40dp"
+        android:backgroundTint="?attr/colorPrimary"
         app:icon="@drawable/icon_back_arrow"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -43,7 +44,7 @@
         android:layout_marginTop="150dp"
         android:text="@string/my_cart"
         android:textSize="35sp"
-        app:layout_constraintStart_toStartOf="@id/back_button"
+        app:layout_constraintStart_toStartOf="@id/close_button"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
@@ -82,7 +83,7 @@
         android:textColor="?attr/colorOnPrimary"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/delivery_label"
-        app:layout_constraintStart_toStartOf="@id/back_button" />
+        app:layout_constraintStart_toStartOf="@id/close_button" />
 
     <TextView
         android:id="@+id/total_text"
@@ -104,7 +105,7 @@
         android:textColor="?attr/colorOnPrimary"
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@id/bottom_divider"
-        app:layout_constraintStart_toStartOf="@id/back_button" />
+        app:layout_constraintStart_toStartOf="@id/close_button" />
 
     <TextView
         android:id="@+id/delivery_text"
@@ -134,9 +135,7 @@
         android:layout_margin="40dp"
         android:backgroundTint="?attr/colorSecondary"
         android:text="@string/checkout"
-        android:textAllCaps="false"
         android:textSize="20sp"
-        app:cornerRadius="10dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
 

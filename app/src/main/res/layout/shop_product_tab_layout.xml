@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="?attr/colorBackgroundFloating">
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/icon_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:constraint_referenced_ids="cpu_image,camera_image,ssd_image,cd_image"
+        app:flow_horizontalStyle="spread_inside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/cpu_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha=".5"
+        android:src="@drawable/icon_cpu" />
+
+    <ImageView
+        android:id="@+id/camera_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha=".5"
+        android:src="@drawable/icon_camera" />
+
+    <ImageView
+        android:id="@+id/ssd_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha=".5"
+        android:src="@drawable/icon_ram" />
+
+    <ImageView
+        android:id="@+id/cd_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:alpha=".5"
+        android:src="@drawable/icon_rom" />
+
+    <TextView
+        android:id="@+id/cpu_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        app:layout_constraintEnd_toEndOf="@id/cpu_image"
+        app:layout_constraintStart_toStartOf="@id/cpu_image"
+        app:layout_constraintTop_toBottomOf="@id/icon_flow"
+        tools:text="Exynos 990" />
+
+    <TextView
+        android:id="@+id/camera_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        app:layout_constraintEnd_toEndOf="@id/camera_image"
+        app:layout_constraintStart_toStartOf="@id/camera_image"
+        app:layout_constraintTop_toBottomOf="@id/icon_flow"
+        tools:text="108 + 12 mp" />
+
+    <TextView
+        android:id="@+id/ssd_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        app:layout_constraintEnd_toEndOf="@id/ssd_image"
+        app:layout_constraintStart_toStartOf="@id/ssd_image"
+        app:layout_constraintTop_toBottomOf="@id/icon_flow"
+        tools:text="8 GB" />
+
+    <TextView
+        android:id="@+id/cd_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:alpha=".5"
+        app:layout_constraintEnd_toEndOf="@id/cd_image"
+        app:layout_constraintStart_toStartOf="@id/cd_image"
+        app:layout_constraintTop_toBottomOf="@id/icon_flow"
+        tools:text="256 GB" />
+
+    <TextView
+        android:id="@+id/select_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Select color and capacity"
+        android:textSize="15sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cpu_text_view" />
+
+    <androidx.constraintlayout.helper.widget.Flow
+        android:id="@+id/select_flow"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:constraint_referenced_ids="color_layout,capacity_layout"
+        app:flow_horizontalStyle="spread_inside"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/select_label" />
+
+    <LinearLayout
+        android:id="@+id/color_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@id/capacity_layout"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="horizontal"/>
+
+    <LinearLayout
+        android:id="@+id/capacity_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/color_layout"
+        app:layout_constraintTop_toBottomOf="@id/select_label"
+        android:orientation="horizontal"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:backgroundTint="?attr/colorSecondary"
+        android:textSize="20sp"
+        app:layout_constraintTop_toBottomOf="@id/select_flow"
+        tools:text="Add to Cart $1,500.00" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

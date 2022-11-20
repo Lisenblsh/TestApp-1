@@ -3,11 +3,163 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.fragments.CurrentProductFragment"
-    tools:background="@color/white">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-</androidx.constraintlayout.widget.ConstraintLayout>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:background="@color/white"
+    tools:context=".presentation.fragments.CurrentProductFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="40dp"
+            android:backgroundTint="?attr/colorPrimary"
+            app:icon="@drawable/icon_back_arrow"
+            style="@style/Theme.TestApp.Button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:text="Product Details"
+            app:layout_constraintTop_toTopOf="@id/close_button"
+            app:layout_constraintBottom_toBottomOf="@id/close_button"
+            app:layout_constraintStart_toStartOf="@id/close_button"
+            app:layout_constraintEnd_toEndOf="@id/cart_button"
+            />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cart_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_margin="40dp"
+            android:backgroundTint="?attr/colorSecondary"
+            app:icon="@drawable/icon_cart_2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/image_switcher_card"
+            android:layout_width="0dp"
+            android:layout_height="300dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintTop_toBottomOf="@id/close_button"
+            app:layout_constraintStart_toEndOf="@id/close_button"
+            app:layout_constraintEnd_toStartOf="@id/cart_button"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="20dp">
+            <ImageSwitcher
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="20dp"/>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/product_info_card"
+            android:layout_width="match_parent"
+            android:layout_height="300dp"
+            app:cardElevation="20dp"
+            app:layout_constraintTop_toTopOf="@id/product_info"
+            app:layout_constraintBottom_toBottomOf="@id/product_info"
+            app:cardCornerRadius="20dp"/>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/product_info"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:elevation="20dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintTop_toBottomOf="@id/image_switcher_card"
+            app:layout_constraintStart_toStartOf="@id/close_button"
+            app:layout_constraintEnd_toEndOf="@id/cart_button"
+            app:layout_constraintBottom_toBottomOf="parent"
+            >
+            <TextView
+                android:id="@+id/product_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                tools:text="Galaxy Note 20 Ultra"
+                android:layout_marginTop="20dp"/>
+
+            <Button
+                android:id="@+id/favourite_button"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:backgroundTint="?attr/colorPrimary"
+                app:icon="@drawable/icon_favourite_2"
+                app:layout_constraintTop_toTopOf="@id/product_title"
+                app:layout_constraintBottom_toBottomOf="@id/product_title"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <LinearLayout
+                android:id="@+id/rating_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/product_title"
+                >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star"
+                    app:tint="@color/yellow"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star"
+                    app:tint="@color/yellow"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star"
+                    app:tint="@color/yellow"
+                    />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star"
+                    app:tint="@color/yellow" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/icon_star_half"
+                    app:tint="@color/yellow"
+                    />
+
+            </LinearLayout>
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tab_layout_product"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                app:layout_constraintTop_toBottomOf="@id/rating_layout"
+                app:tabIndicatorAnimationMode="elastic"
+                app:tabIndicatorHeight="5dp"
+                app:tabIndicatorAnimationDuration="300"
+                android:saveEnabled="false"/>
+
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/view_pager_product"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                app:layout_constraintTop_toBottomOf="@id/tab_layout_product"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="20dp"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.core.widget.NestedScrollView>

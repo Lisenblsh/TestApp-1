@@ -9,5 +9,14 @@
         android:id="@+id/viewPagerFragment"
         android:name="com.lis.testapp.presentation.fragments.ViewPagerFragment"
         android:label="fragment_view_pager"
-        tools:layout="@layout/fragment_view_pager" />
+        tools:layout="@layout/fragment_view_pager" >
+        <action
+            android:id="@+id/action_viewPagerFragment_to_currentProductFragment"
+            app:destination="@id/currentProductFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentProductFragment"
+        android:name="com.lis.testapp.presentation.fragments.CurrentProductFragment"
+        android:label="fragment_current_product"
+        tools:layout="@layout/fragment_current_product" />
 </navigation>
