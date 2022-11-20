@@ -1,25 +1,21 @@
 package com.lis.testapp.presentation.fragments
 
 import android.app.ActionBar.LayoutParams
-import android.content.Context
-import android.graphics.Rect
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageView
-import androidx.annotation.DimenRes
-import androidx.annotation.Dimension.PX
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
-import com.lis.testapp.presentation.adapters.ImageViewPagerAdapter
+import com.google.android.material.tabs.TabLayoutMediator
+import com.lis.domain.models.CurrentProduct
 import com.lis.testapp.presentation.decorator.HorizontalMarginItemDecoration
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentCurrentProductBinding
+import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
+import com.lis.testapp.presentation.adapters.ImageViewPagerAdapter
 import com.lis.testapp.presentation.viewModels.ProductDetailsViewModel
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -52,14 +48,37 @@ class CurrentProductFragment : Fragment() {
 
                 val imageList = productInfo.images
                 imageSwitcherViewPager.adapter =
-                    ImageViewPagerAdapter(imageList, R.layout.image_card_item, R.id.product_image)
-                setupCarousel()
+                    ImageViewPagerAdapter(imageList, R.layout.image_card_item)
+                setCarousel()
+                setTab(productInfo)
 
             }
         }
     }
 
-    private fun FragmentCurrentProductBinding.setupCarousel() {
+    private fun FragmentCurrentProductBinding.setTab(productInfo: CurrentProduct) {
+
+        val list = listOf(
+            ShopProductTabFragment(productInfo),
+            DetailsProductTabFragment(),
+            FeaturesProductTabFragment()
+        )
+
+        viewPagerProduct.adapter = FragmentViewPagerAdapter(list, childFragmentManager, lifecycle)
+
+        TabLayoutMediator(tabLayoutProduct, viewPagerProduct) { tab, position ->
+            val stringArray =
+                requireContext().resources.getStringArray(R.array.tabs_layout_product)
+            Log.e("stringArray", stringArray.toString())
+            when (position) {
+                0 -> tab.text = stringArray[position]
+                1 -> tab.text = stringArray[position]
+                2 -> tab.text = stringArray[position]
+            }
+        }.attach()
+    }
+
+    private fun FragmentCurrentProductBinding.setCarousel() {
         imageSwitcherViewPager.offscreenPageLimit = 1
 
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)

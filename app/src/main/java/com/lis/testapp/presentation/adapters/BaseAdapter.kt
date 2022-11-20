@@ -1,4 +1,4 @@
-package com.lis.testapp.presentation.adapters.viewHolder
+package com.lis.testapp.presentation.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,11 +6,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 
 
-abstract class BaseViewPagerAdapter<VH : BaseViewPagerAdapter.BaseViewHolder>(
+abstract class BaseAdapter<VH : BaseAdapter.BaseViewHolder>(
     private val listItem: List<*>,
     private val idLayout: Int
-) :
-    RecyclerView.Adapter<VH>() {
+) : RecyclerView.Adapter<VH>() {
+
+    abstract fun createViewHolder(itemView: View): VH
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -19,8 +20,6 @@ abstract class BaseViewPagerAdapter<VH : BaseViewPagerAdapter.BaseViewHolder>(
         val view = LayoutInflater.from(parent.context).inflate(idLayout, parent, false)
         return createViewHolder(view)
     }
-
-    abstract fun createViewHolder(itemView: View): VH
 
     override fun onBindViewHolder(holder: VH, position: Int) {
         holder.bind(listItem[position])
@@ -31,6 +30,8 @@ abstract class BaseViewPagerAdapter<VH : BaseViewPagerAdapter.BaseViewHolder>(
 
     abstract class BaseViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         abstract fun bind(item: Any?)
+
+        abstract fun showData(item: Any)
     }
 
 }

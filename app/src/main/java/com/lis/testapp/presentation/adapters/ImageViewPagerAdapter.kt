@@ -1,31 +1,34 @@
 package com.lis.testapp.presentation.adapters
 
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import android.widget.ImageView
 import com.lis.domain.tools.ImageFun
+import com.lis.testapp.R
 
-class ImageViewPagerAdapter(
-    private val imageList: List<String>,
-    private val idLayout: Int,
-    private val imageView: Int
-) : RecyclerView.Adapter<ImageViewPagerAdapter.ImageViewHolder>() {
+class ImageViewPagerAdapter(imageList: List<String>, idLayout: Int) :
+    BaseAdapter<ImageViewPagerAdapter.ImageViewHolder>(imageList, idLayout) {
+    inner class ImageViewHolder(itemView: View) : BaseViewHolder(itemView) {
 
-    inner class ImageViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        fun bind(image: String) {
-            ImageFun().setImage(image, itemView.findViewById(imageView))
+        private val imageProduct = itemView.findViewById<ImageView>(R.id.product_image)
+
+        override fun bind(item: Any?) {
+            if(item == null) {
+                //TODO("заглушка")
+            } else {
+                showData(item)
+            }
         }
+
+        override fun showData(item: Any) {
+            if(item is String) {
+                ImageFun().setImage(item, imageProduct)
+            }
+        }
+
+
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ImageViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(idLayout, parent, false)
-        return ImageViewHolder(view)
+    override fun createViewHolder(itemView: View): ImageViewHolder {
+        return ImageViewHolder(itemView)
     }
-
-    override fun onBindViewHolder(holder: ImageViewHolder, position: Int) {
-        holder.bind(imageList[position])
-    }
-
-    override fun getItemCount() = imageList.size
 }
