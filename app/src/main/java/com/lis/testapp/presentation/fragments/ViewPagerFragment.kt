@@ -10,7 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.lis.domain.ViewPagerAdapter
+import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentViewPagerBinding
@@ -36,7 +36,7 @@ class ViewPagerFragment : Fragment() {
             AccountFragment()
         )
 
-        val adapter = ViewPagerAdapter(fragmentList, childFragmentManager, lifecycle)
+        val adapter = FragmentViewPagerAdapter(fragmentList, childFragmentManager, lifecycle)
 
         viewPager.adapter = adapter
         viewPager.isUserInputEnabled = false

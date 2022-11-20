@@ -1,4 +1,4 @@
-package com.lis.domain
+package com.lis.testapp.presentation.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
@@ -6,7 +6,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 
-class ViewPagerAdapter(
+class FragmentViewPagerAdapter(
     list: List<Fragment>,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
