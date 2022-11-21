@@ -9,7 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.lis.domain.models.CurrentProduct
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentShopProductTabBinding
-import com.lis.testapp.presentation.adapters.CapacitySelectorViewHolder
+import com.lis.testapp.presentation.adapters.BaseAdapter
+import com.lis.testapp.presentation.adapters.CapacitySelectorAdapter
 import com.lis.testapp.presentation.adapters.ColorSelectorAdapter
 
 class ShopProductTabFragment() : Fragment() {
@@ -37,17 +38,41 @@ class ShopProductTabFragment() : Fragment() {
             ssdTextView.text = product.ssd
             cdTextView.text = product.sd
 
+            setColorList(product)
+            setCapacityList(product)
 
-            this.colorList.also {
-                it.adapter = ColorSelectorAdapter(product.color, R.layout.color_item)
-                it.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-            }
+        }
+    }
 
-            this.capacityList.also {
-                it.adapter = CapacitySelectorViewHolder(product.capacity.reversed(), R.layout.capacity_item)
-                it.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, true)
-            }
+    private fun FragmentShopProductTabBinding.setCapacityList(product: CurrentProduct) {
+        this.capacityList.also { recyclerView ->
+            val adapter = CapacitySelectorAdapter(product.capacity, R.layout.capacity_item)
+            adapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int?) {
+                    if (position != null) {
 
+                    }
+                }
+            })
+            recyclerView.adapter = adapter
+            recyclerView.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        }
+    }
+
+    private fun FragmentShopProductTabBinding.setColorList(product: CurrentProduct) {
+        this.colorList.also {
+            val adapter = ColorSelectorAdapter(product.color, R.layout.color_item)
+            adapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
+                override fun onItemClick(position: Int?) {
+                    if (position != null) {
+
+                    }
+                }
+            })
+            it.adapter = adapter
+            it.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
     }
 }

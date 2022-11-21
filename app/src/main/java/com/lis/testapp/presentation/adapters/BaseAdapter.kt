@@ -34,4 +34,14 @@ abstract class BaseAdapter<VH : BaseAdapter.BaseViewHolder>(
         abstract fun showData(item: Any)
     }
 
+    interface OnItemClickListener {
+        fun onItemClick(position: Int?)
+    }
+
+    lateinit var clickListener: OnItemClickListener
+
+    fun setOnItemClickListener(listener: OnItemClickListener) {
+        this.clickListener = listener
+    }
+
 }

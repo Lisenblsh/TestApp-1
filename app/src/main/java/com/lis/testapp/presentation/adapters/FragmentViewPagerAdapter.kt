@@ -10,8 +10,7 @@ class FragmentViewPagerAdapter(
     list: List<Fragment>,
     fragmentManager: FragmentManager,
     lifecycle: Lifecycle
-) :
-    FragmentStateAdapter(fragmentManager, lifecycle) {
+) : FragmentStateAdapter(fragmentManager, lifecycle) {
 
     private val fragmentList = list
 

@@ -1,24 +1,43 @@
 package com.lis.testapp.presentation.adapters
 
 import android.graphics.Color
-import android.graphics.ColorMatrixColorFilter
 import android.view.View
 import android.widget.ImageView
+import androidx.core.view.isVisible
 import com.lis.testapp.R
 
-
 class ColorSelectorAdapter(colorList: List<String>, idLayout: Int) :
-    BaseAdapter<ColorSelectorAdapter.ColorSelectorViewHolder>(colorList, idLayout) {
+    BaseSelectorAdapter<ColorSelectorAdapter.ColorSelectorViewHolder>(colorList, idLayout) {
 
-    inner class ColorSelectorViewHolder(itemView: View) : BaseViewHolder(itemView) {
+    inner class ColorSelectorViewHolder(itemView: View) : BaseSelectorViewHolder(itemView) {
 
         private val colorCircle = itemView.findViewById<ImageView>(R.id.color_circle)
         private val checkBox = itemView.findViewById<ImageView>(R.id.checkbox)
 
+        init {
+            itemView.setOnClickListener {
+                selectedItemPos = bindingAdapterPosition
+                lastItemSelectedPos = if(lastItemSelectedPos == -1)
+                    selectedItemPos
+                else {
+                    notifyItemChanged(lastItemSelectedPos)
+                    selectedItemPos
+                }
+                clickListener.onItemClick(selectedItemPos)
+                notifyItemChanged(selectedItemPos)
+            }
+        }
+
+        override fun unselectedItem(item: Any?) {
+            checkBox.isVisible = false
+        }
+
+        override fun selectedItem(item: Any?) {
+            checkBox.isVisible = true
+        }
+
         override fun bind(item: Any?) {
-            if (item == null) {
-                //TODO("заглушка")
-            } else {
+            if (item != null) {
                 showData(item)
             }
         }
