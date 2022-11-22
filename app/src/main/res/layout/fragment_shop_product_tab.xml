@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:background="?attr/colorBackgroundFloating"
     tools:context=".presentation.fragments.ShopProductTabFragment"
-    android:paddingHorizontal="20dp">
+    android:paddingHorizontal="40dp">
 
     <androidx.constraintlayout.helper.widget.Flow
         android:id="@+id/label_flow"

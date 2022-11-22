@@ -5,6 +5,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.view.isVisible
 import com.lis.testapp.R
+import com.lis.testapp.presentation.adapters.baseAdapters.BaseSelectorAdapter
 
 class CapacitySelectorAdapter(capacityList: List<String>, idLayout: Int) :
     BaseSelectorAdapter<CapacitySelectorAdapter.CapacitySelectorViewHolder>(capacityList, idLayout) {

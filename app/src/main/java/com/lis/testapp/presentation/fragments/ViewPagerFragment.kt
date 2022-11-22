@@ -7,13 +7,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentViewPagerBinding
+import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
+
 
 class ViewPagerFragment : Fragment() {
 
@@ -25,6 +27,7 @@ class ViewPagerFragment : Fragment() {
     ): View {
         binding = FragmentViewPagerBinding.inflate(inflater, container, false)
         binding.bindViewPager()
+        onBackPressed()
         return binding.root
     }
 
@@ -40,6 +43,7 @@ class ViewPagerFragment : Fragment() {
 
         viewPager.adapter = adapter
         viewPager.isUserInputEnabled = false
+        viewPager.isSaveEnabled = false
 
         TabLayoutMediator(tabLayout, viewPager) { tab, position ->
             val tabCustom = LayoutInflater.from(requireContext())
@@ -113,6 +117,20 @@ class ViewPagerFragment : Fragment() {
                 tabLabel.visibility = visibility
             }
         }
+
+    }
+
+    private fun onBackPressed() {
+        requireActivity()
+            .onBackPressedDispatcher
+            .addCallback(viewLifecycleOwner) {
+                if (binding.viewPager.currentItem == 0) {
+                    super.getActivity()?.onBackPressed()
+
+                } else {
+                    binding.viewPager.currentItem = 0
+                }
+            }
 
     }
 }

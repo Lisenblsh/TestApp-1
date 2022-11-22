@@ -21,6 +21,7 @@
         android:saveEnabled="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:tabGravity="fill"
+        android:elevation="20dp"
         app:tabIndicatorHeight="0dp"
         app:tabMode="fixed"
         app:tabPaddingEnd="0dp"

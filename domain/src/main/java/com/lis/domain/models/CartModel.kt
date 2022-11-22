@@ -1,13 +1,13 @@
 package com.lis.domain.models
 
 data class CartModel(
-    val basket: List<Basket>,
+    val basket: List<BasketModel>,
     val delivery: String,
     val id: String,
     val total: Int
 )
 
-data class Basket(
+data class BasketModel(
     val id: Int,
     val images: String,
     val price: Int,

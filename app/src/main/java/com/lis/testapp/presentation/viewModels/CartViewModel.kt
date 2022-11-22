@@ -1,21 +1,20 @@
 package com.lis.testapp.presentation.viewModels
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import com.lis.data.repository.RepositoryImpl
+import com.lis.domain.Repository
 import com.lis.domain.StorePagingSource
-import com.lis.domain.models.Basket
+import com.lis.domain.models.BasketModel
 import kotlinx.coroutines.flow.Flow
 
 class CartViewModel(
-    private val repository: RepositoryImpl,
+    private val repository: Repository,
 ): ViewModel() {
 
-    val pagingStoreData: Flow<PagingData<Basket>>
+    val pagingStoreData: Flow<PagingData<BasketModel>>
 
     val delivery = MutableLiveData<String>("")
     val id = MutableLiveData<String>("")
@@ -25,7 +24,7 @@ class CartViewModel(
         pagingStoreData = getStoreData()
     }
 
-    private fun getStoreData(): Flow<PagingData<Basket>> {
+    private fun getStoreData(): Flow<PagingData<BasketModel>> {
 
         val storePagingSource = StorePagingSource(repository)
         delivery.value = storePagingSource.delivery

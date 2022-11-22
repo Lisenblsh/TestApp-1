@@ -4,6 +4,7 @@ import android.view.View
 import android.widget.ImageView
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
+import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
 
 class ImageViewPagerAdapter(imageList: List<String>, idLayout: Int) :
     BaseAdapter<ImageViewPagerAdapter.ImageViewHolder>(imageList, idLayout) {
@@ -24,8 +25,6 @@ class ImageViewPagerAdapter(imageList: List<String>, idLayout: Int) :
                 ImageFun().setImage(item, imageProduct)
             }
         }
-
-
     }
 
     override fun createViewHolder(itemView: View): ImageViewHolder {

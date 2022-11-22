@@ -18,5 +18,14 @@
         android:id="@+id/currentProductFragment"
         android:name="com.lis.testapp.presentation.fragments.CurrentProductFragment"
         android:label="fragment_current_product"
-        tools:layout="@layout/fragment_current_product" />
+        tools:layout="@layout/fragment_current_product" >
+        <action
+            android:id="@+id/action_currentProductFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.lis.testapp.presentation.fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
 </navigation>

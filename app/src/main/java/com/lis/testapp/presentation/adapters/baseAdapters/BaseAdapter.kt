@@ -1,4 +1,4 @@
-package com.lis.testapp.presentation.adapters
+package com.lis.testapp.presentation.adapters.baseAdapters
 
 import android.view.LayoutInflater
 import android.view.View

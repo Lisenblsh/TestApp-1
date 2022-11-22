@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.ImageView
 import androidx.core.view.isVisible
 import com.lis.testapp.R
+import com.lis.testapp.presentation.adapters.baseAdapters.BaseSelectorAdapter
 
 class ColorSelectorAdapter(colorList: List<String>, idLayout: Int) :
     BaseSelectorAdapter<ColorSelectorAdapter.ColorSelectorViewHolder>(colorList, idLayout) {

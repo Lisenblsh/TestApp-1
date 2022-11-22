@@ -7,6 +7,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lis.domain.models.CurrentProduct
@@ -32,11 +33,11 @@ class CurrentProductFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
-        lifecycleScope.launch {
-            viewModel.getProductInfo()
-        }
-        binding.viewProductInfo()
+            binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
+            lifecycleScope.launch {
+                viewModel.getProductInfo()
+            }
+            binding.viewProductInfo()
         return binding.root
     }
 
@@ -44,16 +45,26 @@ class CurrentProductFragment : Fragment() {
         viewModel.productInfo.observe(viewLifecycleOwner) { productInfo ->
             if (productInfo != null) {
                 productTitle.text = productInfo.title
-                setRating(productInfo.rating)
-
                 val imageList = productInfo.images
-                imageSwitcherViewPager.adapter =
-                    ImageViewPagerAdapter(imageList, R.layout.image_card_item)
+                imageSwitcherViewPager.adapter = ImageViewPagerAdapter(imageList, R.layout.image_card_item)
                 setCarousel()
+                setRating(productInfo.rating)
                 setTab(productInfo)
-
             }
         }
+
+        closeButton.setOnClickListener{ closeButtonClick() }
+        cartButton.setOnClickListener { cartButtonClick() }
+    }
+
+    private fun closeButtonClick() {
+        super.getActivity()?.onBackPressed()
+    }
+
+    private fun cartButtonClick() {
+        val directions =
+            CurrentProductFragmentDirections.actionCurrentProductFragmentToCartFragment()
+        NavHostFragment.findNavController(this).navigate(directions)
     }
 
     private fun FragmentCurrentProductBinding.setTab(productInfo: CurrentProduct) {
@@ -78,7 +89,9 @@ class CurrentProductFragment : Fragment() {
         }.attach()
     }
 
+
     private fun FragmentCurrentProductBinding.setCarousel() {
+
         imageSwitcherViewPager.offscreenPageLimit = 1
 
         val nextItemVisiblePx = resources.getDimension(R.dimen.viewpager_next_item_visible)
@@ -93,14 +106,21 @@ class CurrentProductFragment : Fragment() {
         }
 
         imageSwitcherViewPager.setPageTransformer(pageTransformer)
+
+        if(imageSwitcherViewPager.itemDecorationCount != 0){
+            imageSwitcherViewPager.removeItemDecorationAt(0)
+        }
+
         val itemDecoration = HorizontalMarginItemDecoration(
             requireContext(),
             R.dimen.viewpager_current_item_horizontal_margin
         )
-        imageSwitcherViewPager.addItemDecoration(itemDecoration)
+        imageSwitcherViewPager.addItemDecoration(itemDecoration,0)
+
     }
 
     private fun FragmentCurrentProductBinding.setRating(rating: Double) {
+        ratingLayout.removeAllViews()
         repeat(rating.toInt()) {
             ratingLayout.addView(createImageView(RatingStar.FULL_STAR))
         }
