@@ -1,6 +1,5 @@
 package com.lis.data.repository
 
-import android.util.Log
 import com.lis.data.network.retrofit.RetrofitService
 import com.lis.domain.Repository
 import com.lis.domain.models.CartModel
@@ -14,8 +13,6 @@ class RepositoryImpl(private val service: RetrofitService): Repository {
     }
 
     override suspend fun getCurrentProduct(): Response<CurrentProduct> {
-        val temp = service.getCurrentProduct()
-        Log.e("productInfo2", temp.body().toString())
         return service.getCurrentProduct()
     }
 

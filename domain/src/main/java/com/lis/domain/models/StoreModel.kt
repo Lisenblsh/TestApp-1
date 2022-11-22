@@ -1,20 +1,20 @@
 package com.lis.domain.models
 
 data class StoreModel(
-    val home_store: List<HomeStore>,
-    val best_seller: List<BestSeller>
+    val home_store: List<HomeStoreModel>,
+    val best_seller: List<BestSellerModel>
 )
 
-data class HomeStore(
+data class HomeStoreModel(
     val id: Int,
     val is_buy: Boolean,
-    val is_new: Boolean,
+    val is_new: Boolean = false,
     val picture: String,
     val subtitle: String,
     val title: String
 )
 
-data class BestSeller(
+data class BestSellerModel(
     val discount_price: Int,
     val id: Int,
     val is_favorites: Boolean,

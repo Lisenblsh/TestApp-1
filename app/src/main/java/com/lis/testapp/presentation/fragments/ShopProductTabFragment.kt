@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.SimpleItemAnimator
 import com.lis.domain.models.CurrentProduct
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentShopProductTabBinding
 import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
-import com.lis.testapp.presentation.adapters.CapacitySelectorAdapter
-import com.lis.testapp.presentation.adapters.ColorSelectorAdapter
+import com.lis.testapp.presentation.adapters.selectorAdpter.CapacitySelectorAdapter
+import com.lis.testapp.presentation.adapters.selectorAdpter.ColorSelectorAdapter
 
 class ShopProductTabFragment() : Fragment() {
 
@@ -56,13 +57,14 @@ class ShopProductTabFragment() : Fragment() {
                 }
             })
             recyclerView.adapter = adapter
+            (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             recyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
     private fun FragmentShopProductTabBinding.setColorList(product: CurrentProduct) {
-        this.colorList.also {
+        this.colorList.also { recyclerView ->
             val adapter = ColorSelectorAdapter(product.color, R.layout.color_item)
             adapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
                 override fun onItemClick(position: Int?) {
@@ -71,8 +73,9 @@ class ShopProductTabFragment() : Fragment() {
                     }
                 }
             })
-            it.adapter = adapter
-            it.layoutManager =
+            recyclerView.adapter = adapter
+            (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+            recyclerView.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
         }
     }

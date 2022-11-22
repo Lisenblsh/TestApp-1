@@ -1,4 +1,4 @@
-package com.lis.testapp.presentation.adapters
+package com.lis.testapp.presentation.adapters.selectorAdpter
 
 import android.view.View
 import android.widget.ImageView

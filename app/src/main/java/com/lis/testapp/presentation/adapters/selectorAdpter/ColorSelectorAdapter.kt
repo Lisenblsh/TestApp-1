@@ -1,4 +1,4 @@
-package com.lis.testapp.presentation.adapters
+package com.lis.testapp.presentation.adapters.selectorAdpter
 
 import android.graphics.Color
 import android.view.View

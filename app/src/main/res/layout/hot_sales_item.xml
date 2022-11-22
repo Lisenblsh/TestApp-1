@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="10dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_hot_sales"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/test_image_2"
+            android:foreground="@color/black_transparent"/>
+
+        <ImageView
+            android:id="@+id/label_new_circle_hot_sales"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="10dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/circle" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/new_string"
+            android:textAlignment="center"
+            android:textColor="?attr/colorOnSecondary"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@id/label_new_circle_hot_sales"
+            app:layout_constraintEnd_toEndOf="@id/label_new_circle_hot_sales"
+            app:layout_constraintStart_toStartOf="@id/label_new_circle_hot_sales"
+            app:layout_constraintTop_toTopOf="@id/label_new_circle_hot_sales"
+            app:layout_constraintVertical_bias="0.45"
+            tools:ignore="SmallSp" />
+
+        <TextView
+            android:id="@+id/title_hot_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="25sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias=".3"
+            tools:text="Iphone 12" />
+
+        <TextView
+            android:id="@+id/subtitle_hot_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="11sp"
+            app:layout_constraintStart_toStartOf="@id/title_hot_sales"
+            app:layout_constraintTop_toBottomOf="@id/title_hot_sales"
+            tools:text="Súper. Mega. Rápido." />
+
+        <Button
+            android:id="@+id/buy_button_hot_sales"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginVertical="20dp"
+            android:backgroundTint="@color/white"
+            android:text="@string/buy_now"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/title_hot_sales" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>

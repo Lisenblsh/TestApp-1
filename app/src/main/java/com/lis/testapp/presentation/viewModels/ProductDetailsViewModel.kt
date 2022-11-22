@@ -12,7 +12,11 @@ class ProductDetailsViewModel(private val getProduct: GetCurrentProduct): ViewMo
 
     val productInfo: MutableLiveData<CurrentProduct?> = MutableLiveData()
 
-    suspend fun getProductInfo() = viewModelScope.launch {
+    init {
+        getProductInfo()
+    }
+
+    private fun getProductInfo() = viewModelScope.launch {
         productInfo.value = getProduct.execute()
     }
 }

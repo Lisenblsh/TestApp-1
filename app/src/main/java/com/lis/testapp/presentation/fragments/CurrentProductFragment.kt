@@ -34,9 +34,6 @@ class CurrentProductFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
             binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
-            lifecycleScope.launch {
-                viewModel.getProductInfo()
-            }
             binding.viewProductInfo()
         return binding.root
     }
