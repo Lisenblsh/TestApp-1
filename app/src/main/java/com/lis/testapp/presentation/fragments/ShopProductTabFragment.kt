@@ -8,6 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.lis.domain.models.CurrentProduct
+import com.lis.domain.tools.WITH_ZEROS
+import com.lis.domain.tools.convertIntPriceToString
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentShopProductTabBinding
 import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
@@ -39,23 +41,27 @@ class ShopProductTabFragment() : Fragment() {
             cameraTextView.text = product.camera
             ssdTextView.text = product.ssd
             cdTextView.text = product.sd
-
+            addToCartButton.text = resources.getString(
+                R.string.add_to_cart,
+                product.price.convertIntPriceToString(WITH_ZEROS)
+            )
             setColorList(product)
             setCapacityList(product)
 
         }
     }
 
+    private val onItemClickListener = object : BaseAdapter.OnItemClickListener {
+        override fun onItemClick(id: Int?) {}
+
+        override fun onButtonOnItemClick(id: Int?) {}
+    }
+
     private fun FragmentShopProductTabBinding.setCapacityList(product: CurrentProduct) {
         this.capacityList.also { recyclerView ->
-            val adapter = CapacitySelectorAdapter(product.capacity, R.layout.capacity_item)
-            adapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int?) {
-                    if (position != null) {
-
-                    }
-                }
-            })
+            val adapter = CapacitySelectorAdapter(product.capacity, R.layout.capacity_item).also {
+                it.setOnItemClickListener(onItemClickListener)
+            }
             recyclerView.adapter = adapter
             (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             recyclerView.layoutManager =
@@ -65,14 +71,9 @@ class ShopProductTabFragment() : Fragment() {
 
     private fun FragmentShopProductTabBinding.setColorList(product: CurrentProduct) {
         this.colorList.also { recyclerView ->
-            val adapter = ColorSelectorAdapter(product.color, R.layout.color_item)
-            adapter.setOnItemClickListener(object : BaseAdapter.OnItemClickListener {
-                override fun onItemClick(position: Int?) {
-                    if (position != null) {
-
-                    }
-                }
-            })
+            val adapter = ColorSelectorAdapter(product.color, R.layout.color_item).also {
+                it.setOnItemClickListener(onItemClickListener)
+            }
             recyclerView.adapter = adapter
             (recyclerView.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
             recyclerView.layoutManager =

@@ -35,7 +35,8 @@ abstract class BaseAdapter<VH : BaseAdapter.BaseViewHolder>(
     }
 
     interface OnItemClickListener {
-        fun onItemClick(position: Int?)
+        fun onItemClick(id: Int?)
+        fun onButtonOnItemClick(id: Int?)
     }
 
     lateinit var clickListener: OnItemClickListener

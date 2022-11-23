@@ -6,7 +6,6 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.ImageView
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
@@ -18,7 +17,6 @@ import com.lis.testapp.databinding.FragmentCurrentProductBinding
 import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
 import com.lis.testapp.presentation.adapters.ImageViewPagerAdapter
 import com.lis.testapp.presentation.viewModels.ProductDetailsViewModel
-import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
 import kotlin.math.ceil
@@ -29,28 +27,34 @@ class CurrentProductFragment : Fragment() {
 
     private val viewModel by viewModel<ProductDetailsViewModel>()
 
+    private var fragmentAdapter: FragmentViewPagerAdapter? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-            binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
-            binding.viewProductInfo()
+
+        binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
+        binding.viewProductInfo()
+
         return binding.root
     }
+
 
     private fun FragmentCurrentProductBinding.viewProductInfo() {
         viewModel.productInfo.observe(viewLifecycleOwner) { productInfo ->
             if (productInfo != null) {
                 productTitle.text = productInfo.title
                 val imageList = productInfo.images
-                imageSwitcherViewPager.adapter = ImageViewPagerAdapter(imageList, R.layout.image_card_item)
+                imageSwitcherViewPager.adapter =
+                    ImageViewPagerAdapter(imageList, R.layout.image_card_item)
                 setCarousel()
                 setRating(productInfo.rating)
                 setTab(productInfo)
             }
         }
 
-        closeButton.setOnClickListener{ closeButtonClick() }
+        closeButton.setOnClickListener { closeButtonClick() }
         cartButton.setOnClickListener { cartButtonClick() }
     }
 
@@ -65,14 +69,15 @@ class CurrentProductFragment : Fragment() {
     }
 
     private fun FragmentCurrentProductBinding.setTab(productInfo: CurrentProduct) {
-
+        viewPagerProduct.adapter = null
         val list = listOf(
             ShopProductTabFragment(productInfo),
             DetailsProductTabFragment(),
             FeaturesProductTabFragment()
         )
 
-        viewPagerProduct.adapter = FragmentViewPagerAdapter(list, childFragmentManager, lifecycle)
+        fragmentAdapter = FragmentViewPagerAdapter(list, childFragmentManager, lifecycle)
+        viewPagerProduct.adapter = fragmentAdapter
 
         TabLayoutMediator(tabLayoutProduct, viewPagerProduct) { tab, position ->
             val stringArray =
@@ -85,7 +90,6 @@ class CurrentProductFragment : Fragment() {
             }
         }.attach()
     }
-
 
     private fun FragmentCurrentProductBinding.setCarousel() {
 
@@ -104,7 +108,7 @@ class CurrentProductFragment : Fragment() {
 
         imageSwitcherViewPager.setPageTransformer(pageTransformer)
 
-        if(imageSwitcherViewPager.itemDecorationCount != 0){
+        if (imageSwitcherViewPager.itemDecorationCount != 0) {
             imageSwitcherViewPager.removeItemDecorationAt(0)
         }
 
@@ -112,7 +116,7 @@ class CurrentProductFragment : Fragment() {
             requireContext(),
             R.dimen.viewpager_current_item_horizontal_margin
         )
-        imageSwitcherViewPager.addItemDecoration(itemDecoration,0)
+        imageSwitcherViewPager.addItemDecoration(itemDecoration, 0)
 
     }
 
@@ -152,6 +156,7 @@ class CurrentProductFragment : Fragment() {
     }
 
     companion object {
+
         enum class RatingStar {
             FULL_STAR, HALF_STAR, EMPTY_STAR
         }

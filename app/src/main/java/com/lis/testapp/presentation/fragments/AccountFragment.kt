@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.viewbinding.ViewBinding
+import androidx.viewbinding.ViewBindings
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentAccountBinding
 

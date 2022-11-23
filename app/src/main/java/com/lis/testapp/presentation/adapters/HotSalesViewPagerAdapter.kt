@@ -21,6 +21,15 @@ class HotSalesViewPagerAdapter(hotSalesList: List<HomeStoreModel>, idLayout: Int
             private val subtitle = itemView.findViewById<TextView>(R.id.subtitle_hot_sales)
             private val button = itemView.findViewById<Button>(R.id.buy_button_hot_sales)
 
+            private var item: HomeStoreModel? = null
+
+            init {
+                itemView.setOnClickListener {
+                    val id = item?.id
+                    clickListener.onItemClick(id)
+                }
+            }
+
             override fun bind(item: Any?) {
                 if(item != null) {
                     showData(item)
@@ -29,10 +38,15 @@ class HotSalesViewPagerAdapter(hotSalesList: List<HomeStoreModel>, idLayout: Int
 
             override fun showData(item: Any) {
                 if(item is HomeStoreModel) {
+                    this.item = item
+
                     ImageFun().setImage(item.picture,image)
                     newIcon.isVisible = item.is_new
                     title.text = item.title
                     subtitle.text = item.subtitle
+
+                    button.setOnClickListener { clickListener.onButtonOnItemClick(item.id) }
+
                 }
             }
 

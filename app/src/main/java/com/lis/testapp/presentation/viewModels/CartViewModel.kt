@@ -2,47 +2,27 @@ package com.lis.testapp.presentation.viewModels
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
+import androidx.lifecycle.viewModelScope
 import com.lis.domain.Repository
-import com.lis.domain.StorePagingSource
-import com.lis.domain.models.BasketModel
-import kotlinx.coroutines.flow.Flow
+import com.lis.domain.models.CartModel
+import kotlinx.coroutines.launch
 
 class CartViewModel(
     private val repository: Repository,
 ): ViewModel() {
 
-    val pagingStoreData: Flow<PagingData<BasketModel>>
-
-    val delivery = MutableLiveData<String>("")
-    val id = MutableLiveData<String>("")
-    val total = MutableLiveData<Int>(0)
+    val cartData = MutableLiveData<CartModel>()
 
     init {
-        pagingStoreData = getStoreData()
+        getCartData()
     }
 
-    private fun getStoreData(): Flow<PagingData<BasketModel>> {
+    private fun getCartData() = viewModelScope.launch {
+        val response = repository.getCart()
+        if(response.isSuccessful){
+            cartData.value = response.body()
+        }
 
-        val storePagingSource = StorePagingSource(repository)
-        delivery.value = storePagingSource.delivery
-        id.value = id.value
-        total.value = storePagingSource.total
 
-
-        return Pager(
-            config = PagingConfig(
-                pageSize = PAGE_SIZE,
-                enablePlaceholders = false,
-            )
-        ){
-            storePagingSource
-        }.flow
-    }
-
-    companion object {
-        private const val PAGE_SIZE = 20
     }
 }

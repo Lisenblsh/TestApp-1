@@ -1,6 +1,7 @@
 package com.lis.testapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,13 @@ class ViewPagerFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentViewPagerBinding.inflate(inflater, container, false)
-        binding.bindViewPager()
-        onBackPressed()
+        if(!this::binding.isInitialized){
+            binding = FragmentViewPagerBinding.inflate(inflater, container, false)
+            binding.bindViewPager()
+            onBackPressed()
+        }
+        Log.e("bindingASD2","${binding.hashCode()}")
+
         return binding.root
     }
 
