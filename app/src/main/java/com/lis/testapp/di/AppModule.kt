@@ -12,10 +12,10 @@ val appModule = module {
     }
 
     viewModel<CartViewModel>{
-        CartViewModel(repository = get())
+        CartViewModel(getCartData = get())
     }
 
     viewModel<ExplorerViewModel>{
-        ExplorerViewModel(repository = get())
+        ExplorerViewModel(getStoreData = get())
     }
 }

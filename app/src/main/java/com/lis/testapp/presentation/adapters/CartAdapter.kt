@@ -1,4 +1,4 @@
-package com.lis.testapp.presentation.adapters.pagingAdapters
+package com.lis.testapp.presentation.adapters
 
 import android.view.View
 import android.widget.ImageView

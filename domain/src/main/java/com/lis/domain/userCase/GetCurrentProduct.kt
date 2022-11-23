@@ -1,5 +1,6 @@
 package com.lis.domain.userCase
 
+import com.lis.domain.HttpException
 import com.lis.domain.Repository
 import com.lis.domain.models.CurrentProduct
 
@@ -10,11 +11,11 @@ class GetCurrentProduct(private val repository: Repository) {
     }
 
     private suspend fun checkProduct(): CurrentProduct? {
-        val currentProduct = repository.getCurrentProduct()
-        return if(currentProduct.isSuccessful) {
-            currentProduct.body()
+        val response = repository.getCurrentProduct()
+        if(response.isSuccessful) {
+             return response.body()
         } else {
-            null
+            throw HttpException(response.message())
         }
     }
 

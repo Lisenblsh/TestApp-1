@@ -2,20 +2,21 @@ package com.lis.testapp.presentation.fragments
 
 import android.app.ActionBar.LayoutParams
 import android.os.Bundle
-import android.util.Log
-import android.view.*
-import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import com.lis.domain.models.CurrentProduct
-import com.lis.testapp.presentation.decorator.HorizontalMarginItemDecoration
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentCurrentProductBinding
 import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
 import com.lis.testapp.presentation.adapters.ImageViewPagerAdapter
+import com.lis.testapp.presentation.decorator.HorizontalMarginItemDecoration
 import com.lis.testapp.presentation.viewModels.ProductDetailsViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import kotlin.math.abs
@@ -36,10 +37,17 @@ class CurrentProductFragment : Fragment() {
 
         binding = FragmentCurrentProductBinding.inflate(inflater, container, false)
         binding.viewProductInfo()
-
+        binding.bindSwipeRefresh()
         return binding.root
     }
 
+
+    private fun FragmentCurrentProductBinding.bindSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getProductInfo()
+            swipeRefresh.isRefreshing = false
+        }
+    }
 
     private fun FragmentCurrentProductBinding.viewProductInfo() {
         viewModel.productInfo.observe(viewLifecycleOwner) { productInfo ->
@@ -82,7 +90,6 @@ class CurrentProductFragment : Fragment() {
         TabLayoutMediator(tabLayoutProduct, viewPagerProduct) { tab, position ->
             val stringArray =
                 requireContext().resources.getStringArray(R.array.tabs_layout_product)
-            Log.e("stringArray", stringArray.toString())
             when (position) {
                 0 -> tab.text = stringArray[position]
                 1 -> tab.text = stringArray[position]
@@ -154,6 +161,7 @@ class CurrentProductFragment : Fragment() {
         ImageFun().setImage(icon, imageView)
         return imageView
     }
+
 
     companion object {
 

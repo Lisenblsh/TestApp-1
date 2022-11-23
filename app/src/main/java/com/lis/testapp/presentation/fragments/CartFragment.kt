@@ -1,16 +1,16 @@
 package com.lis.testapp.presentation.fragments
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.lis.testapp.R
 import com.lis.testapp.databinding.FragmentCartBinding
+import com.lis.testapp.presentation.adapters.CartAdapter
 import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
-import com.lis.testapp.presentation.adapters.pagingAdapters.CartAdapter
 import com.lis.testapp.presentation.viewModels.CartViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -28,8 +28,16 @@ class CartFragment : Fragment() {
         if (!this::binding.isInitialized) {
             binding = FragmentCartBinding.inflate(inflater, container, false)
             binding.viewInfo()
+            binding.bindSwipeRefresh()
         }
         return binding.root
+    }
+
+    private fun FragmentCartBinding.bindSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getCartData()
+            swipeRefresh.isRefreshing = false
+        }
     }
 
     private var adapter: CartAdapter? = null

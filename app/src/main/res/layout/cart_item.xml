@@ -80,7 +80,7 @@
         app:layout_constraintBottom_toTopOf="@id/add_button"
         app:layout_constraintStart_toStartOf="@id/product_counter"
         app:layout_constraintEnd_toEndOf="@id/product_counter"
-        android:text="1"
+        tools:text="1"
         android:textColor="?attr/colorOnPrimary"
         android:elevation="10dp"/>
 

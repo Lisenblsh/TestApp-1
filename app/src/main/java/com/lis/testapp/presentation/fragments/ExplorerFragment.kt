@@ -1,20 +1,21 @@
 package com.lis.testapp.presentation.fragments
 
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.SimpleItemAnimator
 import com.lis.testapp.R
+import com.lis.testapp.databinding.FilterOptionBinding
 import com.lis.testapp.databinding.FragmentExplorerBinding
 import com.lis.testapp.presentation.adapters.BestSellerAdapter
+import com.lis.testapp.presentation.adapters.FilterViewHolder
 import com.lis.testapp.presentation.adapters.HotSalesViewPagerAdapter
 import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
 import com.lis.testapp.presentation.adapters.selectorAdpter.CategorySelectorAdapter
@@ -37,8 +38,25 @@ class ExplorerFragment : Fragment() {
             binding.viewCategory()
             binding.viewHotSales()
             binding.viewBestSeller()
+            binding.bindFilterMenu()
+            binding.bindSwipeRefresh()
         }
         return binding.root
+    }
+
+    private fun FragmentExplorerBinding.bindFilterMenu() {
+        TODO("check this")
+        val filterOptionBinding =
+            FilterOptionBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false)
+        FilterViewHolder(filterOptionBinding)
+    }
+
+    private fun FragmentExplorerBinding.bindSwipeRefresh() {
+        swipeRefresh.setOnRefreshListener {
+            viewModel.getCategoryList()
+            viewModel.getStoreData()
+            swipeRefresh.isRefreshing = false
+        }
     }
 
     private var categorySelectorAdapter: CategorySelectorAdapter? = null
@@ -46,16 +64,17 @@ class ExplorerFragment : Fragment() {
     private fun FragmentExplorerBinding.viewCategory() {
         viewModel.category.observe(viewLifecycleOwner) { list ->
             if (list != null) {
-                if(categorySelectorAdapter == null){
+                if (categorySelectorAdapter == null) {
                     categorySelectorAdapter =
-                    CategorySelectorAdapter(
-                        categoryList = list,
-                        idLayout = R.layout.category_item
-                    ).also {
-                        it.setOnItemClickListener(onCategoryClick)
-                    }
+                        CategorySelectorAdapter(
+                            categoryList = list,
+                            idLayout = R.layout.category_item
+                        ).also {
+                            it.setOnItemClickListener(onCategoryClick)
+                        }
                     categoryList.adapter = categorySelectorAdapter
-                    (categoryList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations = false
+                    (categoryList.itemAnimator as SimpleItemAnimator).supportsChangeAnimations =
+                        false
                     categoryList.layoutManager =
                         LinearLayoutManager(requireContext(), RecyclerView.HORIZONTAL, false)
                 }
@@ -101,6 +120,7 @@ class ExplorerFragment : Fragment() {
         override fun onButtonOnItemClick(id: Int?) {}
     }
 
+
     private fun directionToCurrentProduct() {
         val directions =
             ViewPagerFragmentDirections.actionViewPagerFragmentToCurrentProductFragment()
@@ -119,7 +139,6 @@ class ExplorerFragment : Fragment() {
                 .show()
         }
     }
-
     private val onOnHotSalesItemClick = object :
         BaseAdapter.OnItemClickListener {
         override fun onItemClick(id: Int?) {

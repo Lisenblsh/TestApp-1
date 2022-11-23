@@ -1,148 +1,155 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    android:id="@+id/swipe_refresh"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:background="?attr/colorBackgroundFloating"
-    tools:context=".presentation.fragments.CartFragment"
-    >
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/close_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="?attr/colorPrimary"
-        app:icon="@drawable/icon_back_arrow"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/add_location"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toBottomOf="@id/add_location_button"
-        app:layout_constraintEnd_toStartOf="@id/add_location_button"
-        app:layout_constraintTop_toTopOf="@id/add_location_button" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_location_button"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginBottom="40dp"
-        android:backgroundTint="?attr/colorSecondary"
-        app:icon="@drawable/icon_location"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/close_button" />
-
-    <TextView
-        android:id="@+id/cart_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
-        android:text="@string/my_cart"
-        android:textSize="35sp"
-        app:layout_constraintStart_toStartOf="@id/close_button"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/background_for_list"
+    tools:background="?attr/colorBackgroundFloating">
+<androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/dark_blue_cornet_background"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/cart_label" />
+        android:layout_height="match_parent"
+        tools:background="?attr/colorBackgroundFloating"
+        tools:context=".presentation.fragments.CartFragment"
+        >
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/product_list"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginHorizontal="30dp"
-        app:layout_constraintTop_toTopOf="@id/background_for_list"
-        app:layout_constraintBottom_toBottomOf="@id/top_divider"/>
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/close_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="?attr/colorPrimary"
+            app:icon="@drawable/icon_back_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/top_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="10dp"
-        android:alpha=".5"
-        app:dividerColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/total_label" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/add_location"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="@id/add_location_button"
+            app:layout_constraintEnd_toStartOf="@id/add_location_button"
+            app:layout_constraintTop_toTopOf="@id/add_location_button" />
 
-    <TextView
-        android:id="@+id/total_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="20dp"
-        android:text="@string/total"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/delivery_label"
-        app:layout_constraintStart_toStartOf="@id/close_button" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/add_location_button"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="40dp"
+            android:backgroundTint="?attr/colorSecondary"
+            app:icon="@drawable/icon_location"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/close_button" />
 
-    <TextView
-        android:id="@+id/total_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@id/add_location_button"
-        app:layout_constraintTop_toTopOf="@id/total_label"
-        tools:text="$6,000 us" />
+        <TextView
+            android:id="@+id/cart_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="150dp"
+            android:text="@string/my_cart"
+            android:textSize="35sp"
+            app:layout_constraintStart_toStartOf="@id/close_button"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/delivery_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="10dp"
-        android:text="@string/delivery"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="15sp"
-        app:layout_constraintBottom_toTopOf="@id/bottom_divider"
-        app:layout_constraintStart_toStartOf="@id/close_button" />
+        <ImageView
+            android:id="@+id/background_for_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="50dp"
+            android:src="@drawable/dark_blue_cornet_background"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cart_label" />
 
-    <TextView
-        android:id="@+id/delivery_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:text="Free"
-        android:textColor="?attr/colorOnPrimary"
-        android:textSize="15sp"
-        app:layout_constraintEnd_toEndOf="@id/add_location_button"
-        app:layout_constraintTop_toTopOf="@id/delivery_label" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/product_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintTop_toTopOf="@id/background_for_list"
+            app:layout_constraintBottom_toBottomOf="@id/top_divider"/>
 
-    <com.google.android.material.divider.MaterialDivider
-        android:id="@+id/bottom_divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="5dp"
-        android:layout_marginVertical="30dp"
-        android:alpha=".5"
-        app:dividerColor="?attr/colorOnPrimary"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/checkout_button" />
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/top_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="10dp"
+            android:alpha=".5"
+            app:dividerColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/total_label" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/checkout_button"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginHorizontal="40dp"
-        android:layout_marginBottom="100dp"
-        android:backgroundTint="?attr/colorSecondary"
-        android:text="@string/checkout"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        <TextView
+            android:id="@+id/total_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:text="@string/total"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/delivery_label"
+            app:layout_constraintStart_toStartOf="@id/close_button" />
+
+        <TextView
+            android:id="@+id/total_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="textEnd"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/add_location_button"
+            app:layout_constraintTop_toTopOf="@id/total_label"
+            tools:text="$6,000 us" />
+
+        <TextView
+            android:id="@+id/delivery_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="10dp"
+            android:text="@string/delivery"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toTopOf="@id/bottom_divider"
+            app:layout_constraintStart_toStartOf="@id/close_button" />
+
+        <TextView
+            android:id="@+id/delivery_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Free"
+            android:textColor="?attr/colorOnPrimary"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@id/add_location_button"
+            app:layout_constraintTop_toTopOf="@id/delivery_label" />
+
+        <com.google.android.material.divider.MaterialDivider
+            android:id="@+id/bottom_divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginHorizontal="5dp"
+            android:layout_marginVertical="30dp"
+            android:alpha=".5"
+            app:dividerColor="?attr/colorOnPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/checkout_button" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/checkout_button"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="40dp"
+            android:layout_marginBottom="100dp"
+            android:backgroundTint="?attr/colorSecondary"
+            android:text="@string/checkout"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
