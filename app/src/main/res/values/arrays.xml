@@ -5,4 +5,14 @@
         <item>Details</item>
         <item>Features</item>
     </string-array>
+
+    <array name="size_array">
+        <item>3.0</item>
+        <item>8.0</item>
+    </array>
+
+    <array name="price_array">
+        <item>0.0</item>
+        <item>10000.0</item>
+    </array>
 </resources>

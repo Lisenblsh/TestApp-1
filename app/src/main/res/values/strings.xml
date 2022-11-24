@@ -26,4 +26,6 @@
     <string name="size">Size</string>
     <string name="product_details">Product Details</string>
     <string name="select_color_and_capacity">Select color and capacity</string>
+    <string name="size_label">%1$s to %2$s inches</string>
+    <string name="price_label">%1$s - %2$s</string>
 </resources>

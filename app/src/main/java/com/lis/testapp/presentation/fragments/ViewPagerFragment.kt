@@ -1,6 +1,7 @@
 package com.lis.testapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,9 +17,13 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.lis.domain.HttpException
 import com.lis.domain.tools.ImageFun
 import com.lis.testapp.R
+import com.lis.testapp.databinding.FilterOptionBinding
+import com.lis.testapp.databinding.FragmentExplorerBinding
 import com.lis.testapp.databinding.FragmentViewPagerBinding
+import com.lis.testapp.presentation.adapters.FilterViewHolder
 import com.lis.testapp.presentation.adapters.FragmentViewPagerAdapter
 import com.lis.testapp.presentation.viewModels.CartViewModel
+import com.lis.testapp.presentation.viewModels.SharedViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 
@@ -27,6 +32,8 @@ class ViewPagerFragment : Fragment() {
     private lateinit var binding: FragmentViewPagerBinding
 
     private val viewModel by viewModel<CartViewModel>()
+
+    private val sharedViewModel: SharedViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,8 +47,37 @@ class ViewPagerFragment : Fragment() {
         return binding.root
     }
 
+    private fun FragmentViewPagerBinding.bindFilterMenu() {
+        val filterOptionBinding =
+            FilterOptionBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false)
+        object :FilterViewHolder(filterOptionBinding){
+            override fun onCancelFilter() {
+                sharedViewModel.isFilterShow.value = false
+            }
+
+            override fun onDoneFilter() {
+                sharedViewModel.isFilterShow.value = false
+                sharedViewModel.brand = brand
+                sharedViewModel.minPrice = minPrice
+                sharedViewModel.maxPrice = maxPrice
+
+                sharedViewModel.minSize = minSize
+                sharedViewModel.maxSize = maxSize
+
+                sharedViewModel.filterDone.value = true
+            }
+        }
+        binding.constraint.addView(filterOptionBinding.root)
+
+        sharedViewModel.isFilterShow.observe(viewLifecycleOwner) {
+            Log.e("viewModelS", it.toString())
+            filterOptionBinding.root.isVisible = it
+        }
+    }
+
     private fun bind() {
         try {
+            binding.bindFilterMenu()
             binding.bindViewPager()
         } catch (e: HttpException) {
             showToast("Error: ${e.errorMessage}")

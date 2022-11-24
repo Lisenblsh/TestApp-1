@@ -6,10 +6,13 @@ fun Int.convertIntPriceToString(@ConvertMode mode: Int): String {
     val price = this.toString()
     var stringPrice = "$"
     var startIndex = 0
-    if(price.count() == 4) {
-        stringPrice+= price[0]+","
-        startIndex = 1
+    val count = price.count()
+
+    if(count >= 4) {
+        stringPrice+= price.substring(0,count-3)+","
+        startIndex = count-3
     }
+
     stringPrice += price.substring(startIndex)
     stringPrice += when(mode) {
         WITH_US -> " us"

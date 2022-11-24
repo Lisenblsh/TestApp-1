@@ -1,10 +1,13 @@
 package com.lis.testapp.presentation.fragments
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,13 +23,18 @@ import com.lis.testapp.presentation.adapters.HotSalesViewPagerAdapter
 import com.lis.testapp.presentation.adapters.baseAdapters.BaseAdapter
 import com.lis.testapp.presentation.adapters.selectorAdpter.CategorySelectorAdapter
 import com.lis.testapp.presentation.viewModels.ExplorerViewModel
+import com.lis.testapp.presentation.viewModels.SharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getSharedViewModel
+import org.koin.androidx.viewmodel.ext.android.getViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ExplorerFragment : Fragment() {
 
+class ExplorerFragment : Fragment() {
     private lateinit var binding: FragmentExplorerBinding
 
     private val viewModel by viewModel<ExplorerViewModel>()
+
+    private val sharedViewModel by lazy { requireParentFragment().getViewModel<SharedViewModel>()}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,15 +48,21 @@ class ExplorerFragment : Fragment() {
             binding.viewBestSeller()
             binding.bindFilterMenu()
             binding.bindSwipeRefresh()
+            binding.bindSearchView()
         }
         return binding.root
     }
 
+    private fun FragmentExplorerBinding.bindSearchView() {
+        searchCard.setOnClickListener {
+            searchView.isIconified = false
+        }
+    }
+
     private fun FragmentExplorerBinding.bindFilterMenu() {
-        TODO("check this")
-        val filterOptionBinding =
-            FilterOptionBinding.inflate(LayoutInflater.from(requireContext()), binding.root, false)
-        FilterViewHolder(filterOptionBinding)
+        filterButton.setOnClickListener {
+            sharedViewModel.isFilterShow.value = true
+        }
     }
 
     private fun FragmentExplorerBinding.bindSwipeRefresh() {
@@ -115,11 +129,11 @@ class ExplorerFragment : Fragment() {
         }
     }
 
+
     private val onCategoryClick = object : BaseAdapter.OnItemClickListener {
         override fun onItemClick(id: Int?) {}
         override fun onButtonOnItemClick(id: Int?) {}
     }
-
 
     private fun directionToCurrentProduct() {
         val directions =
