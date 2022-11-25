@@ -1,1 +1,1 @@
-[Запись работы прилодения](../TestApp-1/main/Record test app job.mp4)
+[Запись работы прилодения](../main/Record test app job.mp4)
