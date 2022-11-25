@@ -11,5 +11,6 @@ data class BasketModel(
     val id: Int,
     val images: String,
     val price: Int,
-    val title: String
+    val title: String,
+    var count: Int
 )

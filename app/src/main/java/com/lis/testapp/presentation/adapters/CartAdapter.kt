@@ -40,7 +40,6 @@ class CartAdapter(
         private val deleteButton = itemView.findViewById<ImageView>(R.id.delete_button)
 
         private var item: BasketModel? = null
-        private var count = 1
 
 
         init {
@@ -61,21 +60,22 @@ class CartAdapter(
                 this.item = item
                 ImageFun().setImage(item.images, productImage)
                 productTitle.text = item.title
-                productPrice.text = item.price.convertIntPriceToString(WITH_ZEROS)
-                productCount.text = count.toString()
+                productPrice.text = (item.price*item.count).convertIntPriceToString(WITH_ZEROS)
+                productCount.text = item.count.toString()
 
                 deleteButton.setOnClickListener {
                     clickListener.onButtonOnItemClick(item.id)
+                    notifyItemRemoved(bindingAdapterPosition)
                 }
                 addButton.setOnClickListener {
-                    if(count != 10)count++
-                    countClickListener.addClick(item.id, bindingAdapterPosition, count)
-                    notifyItemChanged(bindingAdapterPosition,productCount)
+                    if(item.count != 10)item.count++
+                    countClickListener.addClick(item.id, bindingAdapterPosition, item.count)
+                    notifyItemChanged(bindingAdapterPosition,listOf(productCount,productPrice))
                 }
                 removeButton.setOnClickListener {
-                    if(count != 0) count--
-                    countClickListener.removeClick(item.id, bindingAdapterPosition, count)
-                    notifyItemChanged(bindingAdapterPosition,productCount)
+                    if(item.count != 1) item.count--
+                    countClickListener.removeClick(item.id, bindingAdapterPosition, item.count)
+                    notifyItemChanged(bindingAdapterPosition, listOf(productCount,productPrice))
                 }
             }
         }

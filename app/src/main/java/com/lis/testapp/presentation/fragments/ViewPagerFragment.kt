@@ -113,13 +113,16 @@ class ViewPagerFragment : Fragment() {
             val countCircle = tabCustom.findViewById<ImageView>(R.id.count_circle)
             val countLabel = tabCustom.findViewById<TextView>(R.id.count_label)
             val imageFun = ImageFun()
+
             tabLabel.visibility = View.GONE
+            tabIcon.setColorFilter(resources.getColor(R.color.white, resources.newTheme()))
+
             when (position) {
                 0 -> {
                     tabIcon.layoutParams.height = tabIcon.layoutParams.height / 2
                     tabLabel.text = resources.getString(R.string.label_explorer)
                     tabLabel.visibility = View.VISIBLE
-                    imageFun.setImage(R.drawable.icon_explorer, tabIcon)
+                    imageFun.setImage(R.drawable.circle, tabIcon)
                 }
                 1 -> {
                     tabLabel.text = resources.getString(R.string.label_cart)
